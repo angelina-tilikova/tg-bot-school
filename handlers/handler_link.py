@@ -1,6 +1,6 @@
 from aiogram import types, F
 
-from common import resend_message
+from common import resend_message_without_preview
 
 
 from aiogram import Router, F
@@ -22,4 +22,4 @@ text = '''
 
 @router.message(F.text == "📩 Полезные ссылки")
 async def with_puree(message: types.Message):
-    await resend_message(bot=message.bot, message=message, text=text)
+    await resend_message_without_preview(bot=message.bot, message=message, text=text)
