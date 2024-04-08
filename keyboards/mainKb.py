@@ -8,3 +8,7 @@ globalKeyBoard = [
     [types.KeyboardButton(text="✔️ Неравенства"), 
     types.KeyboardButton(text="📩 Полезные ссылки")],        
 ]
+
+globalStopKeyBoard = [
+    [types.KeyboardButton(text="/start")]
+]

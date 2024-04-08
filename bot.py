@@ -8,7 +8,9 @@ from aiogram.enums import ParseMode
 from common import resend_message
 from config_reader import config
 
-from handlers import handler_start
+from handlers import handler_start, handler_stop, handler_procent, handler_formul,handler_dengree, handler_proportion, handler_ineq
+
+
 
 from KeyboardButton import text1, text2
 
@@ -22,21 +24,19 @@ logging.basicConfig(level=logging.INFO)
 
 # Диспетчер
 dp = Dispatcher()
-dp.include_routers(handler_start.router)
+dp.include_routers(
+    handler_start.router, 
+    handler_stop.router,
+    handler_procent.router, 
+    handler_formul.router, 
+    handler_dengree.router, 
+    handler_proportion.router,
+    handler_ineq.router,
+)
 
-@dp.message(F.text == "📈 Проценты")
-async def with_puree(message: types.Message):
-    await resend_message(bot=bot, message=message, text=text1)
-    
 @dp.message(F.text == "🔪 Формулы сокращенного умножения")
 async def with_puree(message: types.Message):
     await resend_message(bot=bot, message=message, text=text2)
-    
-# Хэндлер на команду /stop
-@dp.message(Command("stop"))
-async def cmd_start(message: types.Message):
-    await resend_message(bot=bot, message=message, text="🔒 <b>До свидания</b>! 🔒\nЖдем вас снова в мире математики!", keyboard=types.reply_keyboard_remove.ReplyKeyboardRemove())
-
 
     
 # Запуск процесса поллинга новых апдейтов
