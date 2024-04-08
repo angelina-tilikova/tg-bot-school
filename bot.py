@@ -1,18 +1,13 @@
 import asyncio
 import logging
-from aiogram import Bot, Dispatcher, types, F, html
-from aiogram.types import Message
+from aiogram import Bot, Dispatcher
 from aiogram.filters.command import Command
-from datetime import datetime
-from aiogram.enums import ParseMode
-from common import resend_message
 from config_reader import config
 
-from handlers import handler_start, handler_stop, handler_procent, handler_formul,handler_dengree, handler_proportion, handler_ineq
+from handlers import handler_start, handler_stop, handler_procent, handler_formul,handler_dengree, handler_proportion, handler_ineq, handler_link
 
 
 
-from KeyboardButton import text1, text2
 
 # Для записей с типом Secret* необходимо 
 # вызывать метод get_secret_value(), 
@@ -32,11 +27,9 @@ dp.include_routers(
     handler_dengree.router, 
     handler_proportion.router,
     handler_ineq.router,
+    handler_link.router
 )
 
-@dp.message(F.text == "🔪 Формулы сокращенного умножения")
-async def with_puree(message: types.Message):
-    await resend_message(bot=bot, message=message, text=text2)
 
     
 # Запуск процесса поллинга новых апдейтов

@@ -1,10 +1,22 @@
-from aiogram import Bot, Dispatcher, types, F, html
-from aiogram.enums import ParseMode
+from aiogram import types, F
+from aiogram.filters.command import Command
+
+from common import resend_message
 
 
+from aiogram import Router, F
 
-# ToDo: 
-text1 = ''' Большинство из вас не задумывается когда произносит: 
+from aiogram.utils.markdown import hide_link
+
+
+router = Router()
+
+@router.message(F.text == "📈 Проценты")
+async def cmd_hidden_link(message: types.Message):
+    answer = f"{hide_link('https://disk.yandex.ru/i/39pf2esTDkmSTQ')}" + f"{text}"
+    await resend_message(bot=message.bot, message=message, text=answer)
+
+text = ''' Большинство из вас не задумывается когда произносит: 
 "Да я на все сто проц уверен, что к/р не будет!". 
 Но многие ли помнят-знают что такое проценты? \n
 <b>Сотая часть метра – сантиметр 1/100м.
@@ -25,13 +37,6 @@ text1 = ''' Большинство из вас не задумывается к�
 думаю для многих легко число которое меньше ста поделить на сто.'''
 
 
-
-text2 = '''
-👉 <b>разность квадратов:</b> a^2 - b^2 = (a - b)*(a + b)
-👉 <b>разность кубов:</b>      a^3 - b^3 = (a - b)(a^2 + ab + b^2)
-👉 <b>сумма кубов:</b>          a^3 + b^3 = (a + b)(a^2 - ab + b^2)
-👉 <b>квадрат суммы:</b>       (a + b)^2 = a^2 + 2ab + b^2
-👉 <b>квадрат разности:</b>   (a - b)^2 = a^2 - 2ab + b^2
-👉 <b>куб разности:</b>       (a - b)^3 =  a^3 - 3a^2b + 3ab^2 - b^3 
-👉 <b>куб суммы:</b>          (a + b)^3 =  a^3 + 3a^2b + 3ab^2 + b^3
-'''
+# @router.message(F.text == "📈 Проценты")
+# async def with_puree(message: types.Message):
+#     await resend_message(bot=message.bot, message=message, text=text)
